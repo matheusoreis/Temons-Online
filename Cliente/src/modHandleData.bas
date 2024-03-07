@@ -6,17 +6,17 @@ Private Function GetAddress(FunAddr As Long) As Long
 End Function
 
 Public Sub InitMessages()
-    HandleDataSub(SSendPing) = GetAddress(AddressOf HandleSendPing)
-    HandleDataSub(SHighIndex) = GetAddress(AddressOf HandleHighIndex)
-    HandleDataSub(SAlertMsg) = GetAddress(AddressOf HandleAlertMsg)
-    HandleDataSub(SLoginOk) = GetAddress(AddressOf HandleLoginOk)
-    HandleDataSub(SCharacters) = GetAddress(AddressOf HandleCharacters)
-    HandleDataSub(SInGame) = GetAddress(AddressOf HandleInGame)
-    HandleDataSub(SPlayerData) = GetAddress(AddressOf HandlePlayerData)
-    HandleDataSub(SMap) = GetAddress(AddressOf HandleMap)
-    HandleDataSub(SCheckForMap) = GetAddress(AddressOf HandleCheckForMap)
-    HandleDataSub(SMapDone) = GetAddress(AddressOf HandleMapDone)
-    HandleDataSub(SPlayerMove) = GetAddress(AddressOf HandlePlayerMove)
+    HandleDataSub(sPing) = GetAddress(AddressOf HandleSendPing)
+    HandleDataSub(sHighIndex) = GetAddress(AddressOf HandleHighIndex)
+    HandleDataSub(sAlertMessage) = GetAddress(AddressOf HandleAlertMsg)
+    HandleDataSub(sLoginFinished) = GetAddress(AddressOf HandleLoginOk)
+    HandleDataSub(sCharacters) = GetAddress(AddressOf HandleCharacters)
+    HandleDataSub(sInGame) = GetAddress(AddressOf HandleInGame)
+    HandleDataSub(sPlayerData) = GetAddress(AddressOf HandlePlayerData)
+    HandleDataSub(sMap) = GetAddress(AddressOf HandleMap)
+    HandleDataSub(sCheckForMap) = GetAddress(AddressOf HandleCheckForMap)
+    HandleDataSub(sMapDone) = GetAddress(AddressOf HandleMapDone)
+    HandleDataSub(sPlayerMove) = GetAddress(AddressOf HandlePlayerMove)
     HandleDataSub(SPlayerXY) = GetAddress(AddressOf HandlePlayerXY)
     HandleDataSub(SPlayerDir) = GetAddress(AddressOf HandlePlayerDir)
     HandleDataSub(SLeftGame) = GetAddress(AddressOf HandleLeftGame)
@@ -327,7 +327,7 @@ Dim isPvP As Byte
         Next
         .StealthMode = buffer.ReadByte
         isPvP = buffer.ReadByte
-        .Win = buffer.ReadLong
+        .win = buffer.ReadLong
         .Lose = buffer.ReadLong
         .Tie = buffer.ReadLong
         
@@ -2264,7 +2264,7 @@ Dim i As Long
 
     Set buffer = New clsBuffer
     buffer.WriteBytes Data()
-    Player(MyIndex).Win = buffer.ReadLong
+    Player(MyIndex).win = buffer.ReadLong
     Player(MyIndex).Lose = buffer.ReadLong
     Player(MyIndex).Tie = buffer.ReadLong
     Set buffer = Nothing

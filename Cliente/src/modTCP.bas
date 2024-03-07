@@ -73,15 +73,16 @@ Dim buffer As clsBuffer
     End If
 End Sub
 
-'//Packets
+' Packet do Ping
 Public Sub CheckPing()
-Dim buffer As clsBuffer
+    Dim buffer As clsBuffer
 
     Set buffer = New clsBuffer
-    buffer.WriteLong CCheckPing
+    
+    buffer.WriteLong cPing
     SendData buffer.ToArray()
+    
     Set buffer = Nothing
-    '//Start Ping Timer
     PingStart = GetTickCount
 End Sub
 
@@ -89,7 +90,7 @@ Public Sub SendNewAccount(ByVal Username As String, ByVal Password As String, By
 Dim buffer As clsBuffer
 
     Set buffer = New clsBuffer
-    buffer.WriteLong CNewAccount
+    buffer.WriteLong cNewAccount
     buffer.WriteString Trim$(Username)
     buffer.WriteString Trim$(Password)
     buffer.WriteString Trim$(Email)
@@ -107,7 +108,7 @@ Public Sub SendLoginInfo(ByVal Username As String, ByVal Password As String)
 Dim buffer As clsBuffer
 
     Set buffer = New clsBuffer
-    buffer.WriteLong CLoginInfo
+    buffer.WriteLong cLoginInfo
     buffer.WriteString Trim$(Username)
     buffer.WriteString Trim$(Password)
     '//Send Version
@@ -124,7 +125,7 @@ Public Sub SendNewCharacter(ByVal CharName As String, ByVal Gender As Byte, ByVa
 Dim buffer As clsBuffer
 
     Set buffer = New clsBuffer
-    buffer.WriteLong CNewCharacter
+    buffer.WriteLong cNewCharacter
     buffer.WriteString Trim$(CharName)
     buffer.WriteByte Gender
     buffer.WriteByte CharSlot
@@ -142,7 +143,7 @@ Public Sub SendUseCharacter(ByVal CharSlot As Byte)
 Dim buffer As clsBuffer
 
     Set buffer = New clsBuffer
-    buffer.WriteLong CUseCharacter
+    buffer.WriteLong cUseCharacter
     buffer.WriteByte CharSlot
     '//Send Version
     buffer.WriteByte GameSetting.CurLanguage
@@ -158,7 +159,7 @@ Public Sub SendDelCharacter(ByVal CharSlot As Byte)
 Dim buffer As clsBuffer
 
     Set buffer = New clsBuffer
-    buffer.WriteLong CDelCharacter
+    buffer.WriteLong cDelCharacter
     buffer.WriteByte CharSlot
     '//Send Version
     buffer.WriteByte GameSetting.CurLanguage

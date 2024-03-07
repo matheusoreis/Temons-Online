@@ -62,11 +62,12 @@ Dim SetWidth As Long
     ChkDir App.Path & "\data\resources\", "animation"
     ChkDir App.Path & "\data\resources\", "weather"
     
-    InitDirectX         '//Load the DirectX
+    InitDirectX
     LoadGui
     
     ' // SERVER SETUP
     ServerMaxWidth = 0
+    
     For i = 1 To MAX_SERVER_LIST
         SetWidth = GetTextWidth(Font_Default, "Server: " & ServerName(i))
         If SetWidth > ServerMaxWidth Then
@@ -75,14 +76,12 @@ Dim SetWidth As Long
     Next
     
     Randomize
-    '//Load Sockets
+    
     TcpInit
     InitMessages
     
-    '//Sound
     InitSound
     
-    '//Clear Game Data
     ClearGameData
     
     LoadCredits
@@ -90,15 +89,15 @@ Dim SetWidth As Long
     frmMain.Width = Form_Width
     frmMain.Height = Form_Height
     frmMain.Caption = GAME_NAME
-    frmMain.Show        '//Make sure that our window is visible
+    frmMain.Show
     
     StartingUp = False
-    
-    '//Set Game State
+
     CanShowCursor = False
     InitCursorTimer = False
+    
     If GameSetting.SkipBootUp = YES Then
-        InitGameState InMenu ', True
+        InitGameState InMenu
         CanShowCursor = True
         InitCursorTimer = True
     Else
@@ -107,8 +106,7 @@ Dim SetWidth As Long
         InitCursorTimer = False
     End If
     
-    '// Open login window
-    User = vbNullString: Pass = vbNullString '//Reset
+    User = vbNullString: Pass = vbNullString
     GuiState GUI_LOGIN, True
     
     ForceExit = False
@@ -174,25 +172,6 @@ Public Sub InitGameState(ByVal gState As GameStateEnum, Optional ByVal IsStart A
             
     End Select
 End Sub
-
-'// This reload window when resolution change
-'Public Sub ReloadWindow(Optional ByVal Resize As Boolean = False)
-    '//Set window size
-'    If Resize Then
-'        frmMain.width = Form_Width
-'        frmMain.height = Form_Height
-'    End If
-    
-    '//Reload
-'    DestroyDirectX
-'    InitDirectX
-        
-    '// If failed to load gui, then exit app
-'    ResetGui
-'    ResetAllGuiLocation
-    
-'    ReInit = False
-'End Sub
 
 Public Sub UpdateGuiCount(ByVal vGui As GuiEnum, ByVal gVisible As Boolean)
 Dim X As Byte

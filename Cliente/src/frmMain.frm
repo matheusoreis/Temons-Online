@@ -1,5 +1,5 @@
 VERSION 5.00
-Object = "{248DD890-BB45-11CF-9ABC-0080C7E7B78D}#1.0#0"; "Mswinsck.ocx"
+Object = "{248DD890-BB45-11CF-9ABC-0080C7E7B78D}#1.0#0"; "mswinsck.ocx"
 Begin VB.Form frmMain 
    AutoRedraw      =   -1  'True
    BorderStyle     =   1  'Fixed Single
@@ -59,29 +59,6 @@ End Sub
 
 Private Sub Form_MouseUp(Button As Integer, Shift As Integer, X As Single, Y As Single)
     FormMouseUp Button, Shift, X, Y
-End Sub
-
-Private Sub Form_Resize()
-    'If GameSetting.Fullscreen = YES Then Exit Sub
-    
-    'If Not StartingUp Then
-    '    ReInit = True
-    '    If Me.WindowState = vbMaximized Then
-            '// Set Resolution
-    '        GameSetting.Resolution = Resolution.MaxResolution + 1
-    '        GameSetting.Fullscreen = NO
-            
-            '//reload
-    '        ReloadWindow
-    '    Else
-            '// Set Resolution
-    '        GameSetting.Resolution = BackUpRes
-    '        GameSetting.Fullscreen = NO
-            
-            '//reload
-    '        ReloadWindow
-    '    End If
-    'End If
 End Sub
 
 Private Sub Form_Unload(Cancel As Integer)

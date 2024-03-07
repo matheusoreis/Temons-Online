@@ -1,21 +1,19 @@
 Attribute VB_Name = "modEnumeration"
 Option Explicit
 
-'//The order of the packets must match with the client's packet enumeration
-
-'//Packets sent by server to client
 Public Enum ServerPackets
-    SSendPing = 1
-    SHighIndex
-    SAlertMsg
-    SLoginOk
-    SCharacters
-    SInGame
-    SPlayerData
-    SMap
-    SCheckForMap
-    SMapDone
-    SPlayerMove
+    sPing = 1
+    sHighIndex
+    sAlertMessage
+    sLoginFinished
+    sCharacters
+    sInGame
+    sPlayerData
+    sMap
+    sCheckForMap
+    sMapDone
+    
+    sPlayerMove
     SPlayerXY
     SPlayerDir
     SLeftGame
@@ -104,18 +102,18 @@ Public Enum ServerPackets
     SRank
     SDataLimit
     SPlayerPvP
-    '//Make sure SMSG_COUNT is below everything else
+
     SMSG_Count
 End Enum
 
-'//Packets sent by client to server
 Public Enum ClientPackets
-    CCheckPing = 1
-    CNewAccount
-    CLoginInfo
-    CNewCharacter
-    CUseCharacter
-    CDelCharacter
+    cPing = 1
+    cNewAccount
+    cLoginInfo
+    cNewCharacter
+    cUseCharacter
+    cDelCharacter
+    
     CNeedMap
     CPlayerMove
     CPlayerDir

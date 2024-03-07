@@ -210,7 +210,6 @@ Dim DefaultRes As Byte
     
     '//Set count of Resolution
     ReDim Resolution.ResolutionSize(LBound(TmpResolution) To UBound(TmpResolution))
-    Resolution.MaxResolution = UBound(TmpResolution)
     
     '//Update Resolution
     For i = LBound(TmpResolution) To UBound(TmpResolution)
@@ -239,57 +238,30 @@ End Function
 
 '//Resolution
 Private Function UpdateScreenResolution() As Boolean
-    'On Error GoTo ErrorHandler
+    On Error GoTo errorHandler
     
-    '//Check for error
-    If GameSetting.Resolution > Resolution.MaxResolution + 1 Or GameSetting.Resolution < 0 Then GoTo errorHandler
-    
-    '//Set Resolution
-    '//If it is fullscreen then set the resolution at the highest
-    If GameSetting.Resolution = Resolution.MaxResolution + 1 Then
-        '// This is set to custom
-        Screen_Width = frmMain.scaleWidth
-        Screen_Height = frmMain.scaleHeight
+    If GameSetting.Fullscreen = YES Then
+        Screen_Width = GetSystemMetrics(SM_CXSCREEN)
+        Screen_Height = GetSystemMetrics(SM_CYSCREEN)
     Else
-        If GameSetting.Fullscreen = YES Then
-            Screen_Width = GetSystemMetrics(SM_CXSCREEN)
-            Screen_Height = GetSystemMetrics(SM_CYSCREEN)
-        Else
-            'With Resolution.ResolutionSize(GameSetting.Resolution)
-            '    If .Width >= GetSystemMetrics(SM_CXSCREEN) Then
-            '        Screen_Width = GetSystemMetrics(SM_CXSCREEN)
-            '    Else
-            '        Screen_Width = .Width
-            '    End If
-            '    If .Width >= GetSystemMetrics(SM_CYSCREEN) Then
-            '        Screen_Height = GetSystemMetrics(SM_CYSCREEN)
-            '    Else
-            '        Screen_Height = .Height
-            '    End If
-            'End With
-            Screen_Width = 800
-            Screen_Height = 608
-        End If
+        Screen_Width = 1366
+        Screen_Height = 768
     End If
-    
-    '//Make sure to update viewport
+
     ViewPortInit = False
 
     '//Set Window Size
     Form_Width = (Screen_Width * Screen.TwipsPerPixelX) + (frmMain.Width - (frmMain.scaleWidth * Screen.TwipsPerPixelX))
     Form_Height = (Screen_Height * Screen.TwipsPerPixelY) + (frmMain.Height - (frmMain.scaleHeight * Screen.TwipsPerPixelY))
 
-    '//If setting is on fullscreen mode then, let's put the window on the top most to prevent clicking other program
     If GameSetting.Fullscreen = YES Then
         Call SetWindowPos(frmMain.hwnd, HWND_TOPMOST, 0, 0, 0, 0, SWP_NOMOVE Or SWP_NOSIZE)
     End If
 
-    '//We succeed
     UpdateScreenResolution = True
     
     Exit Function
 errorHandler:
-    '//We failed
     UpdateScreenResolution = False
 End Function
 

@@ -251,7 +251,7 @@ Public Type PlayerRec
     ActionTmr As Long
     
     ' PvP
-    Win As Long
+    win As Long
     Lose As Long
     Tie As Long
     
@@ -788,7 +788,6 @@ Private Type ResolutionDataRec
 End Type
 
 Private Type ResolutionRec
-    MaxResolution As Integer
     ResolutionSize() As ResolutionDataRec
 End Type
 
